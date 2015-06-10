@@ -46,29 +46,29 @@ namespace GS1Parser
         private static string[] aiis;
         private static int minLengthOfAI = 1;
         private static int maxLengthOfAI = 4;
-        private static char groutSeperator = (char)29;
+        private static char groupSeparator = (char)29;
         private static string ean128StartCode = "]C1";
         private static bool hasCheckSum = true;
 
         public static bool HasCheckSum
         {
-            get { return EAN128Parser.hasCheckSum; }
-            set { EAN128Parser.hasCheckSum = value; }
+            get { return GS1.hasCheckSum; }
+            set { GS1.hasCheckSum = value; }
         }
 
-        public static char GroutSeperator
+        public static char GroupSeparator
         {
-            get { return EAN128Parser.groutSeperator; }
-            set { EAN128Parser.groutSeperator = value; }
+            get { return GS1.groupSeparator; }
+            set { GS1.groupSeparator = value; }
         }
 
         public static string EAN128StartCode
         {
-            get { return EAN128Parser.ean128StartCode; }
-            set { EAN128Parser.ean128StartCode = value; }
+            get { return GS1.ean128StartCode; }
+            set { GS1.ean128StartCode = value; }
         }
 
-        static EAN128Parser()
+        static GS1()
         {
             Add("00", "SerialShippingContainerCode", 2, DataType.Numeric, 18, false);
             Add("01", "EAN-NumberOfTradingUnit", 2, DataType.Numeric, 14, false);
@@ -287,7 +287,7 @@ namespace GS1Parser
             if (ai.FNC1)
             {
                 // try to find the index of the group seperator
-                int indexOfGroupTermination = result.IndexOf(GroutSeperator);
+                int indexOfGroupTermination = result.IndexOf(GroupSeparator);
                 if (indexOfGroupTermination >= 0)
                     lenghtToRead = indexOfGroupTermination + 1;
                 // get the data of the current AI till the gorup seperator
